@@ -260,7 +260,7 @@ const Process = () => (
 
 // ============ Contact ============
 // TODO: reemplazar por los datos reales de UMBRA
-const CONTACT_EMAIL = 'tomass.pastrana@gmail.com';
+const CONTACT_EMAIL = 'contacto@umbra-lat.com';
 const WHATSAPP_NUMBER = '5493875790908'; // formato internacional sin "+", ej: 5493875551234
 // Pega aquí tu Access Key de https://web3forms.com (gratis). El correo llega solo, sin backend.
 const WEB3FORMS_KEY = '4a9aa663-bc20-4078-b023-96366be6f2d5';
