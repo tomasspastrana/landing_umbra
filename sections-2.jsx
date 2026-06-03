@@ -23,7 +23,7 @@ const FeatureTriage = () => (
         <h2 className="mt-5 text-3xl md:text-5xl font-semibold tracking-tight leading-[1.02]">
           Clear your inbox<br />in a single pass.
         </h2>
-        <p className="mt-6 text-white/60 text-base leading-[1.6] max-w-md">
+        <p className="mt-6 text-white/75 text-base leading-[1.6] max-w-md">
           Aura reads every message, understands intent, and routes the noise away from the signal. Focus on what moves your day forward — the rest handles itself.
         </p>
         <div className="mt-8 flex flex-wrap gap-2">
@@ -183,7 +183,7 @@ const Services = () => (
       <h2 className="mt-5 font-semibold tracking-tight leading-[1.05]" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}>
         Todo lo que tu idea necesita para crecer
       </h2>
-      <p className="mt-5 text-white/60 text-base leading-[1.6]">
+      <p className="mt-5 text-white/75 text-base leading-[1.6]">
         Combinamos desarrollo a medida e inteligencia artificial para llevar tu proyecto del concepto a la realidad.
       </p>
     </div>
@@ -207,7 +207,7 @@ const Services = () => (
               <Ico />
             </div>
             <h3 className="mt-5 text-xl font-semibold tracking-tight text-white">{s.title}</h3>
-            <p className="mt-3 text-sm text-white/55 leading-[1.6]">{s.desc}</p>
+            <p className="mt-3 text-sm text-white/75 leading-[1.6]">{s.desc}</p>
           </Mo.div>
         );
       })}
@@ -251,7 +251,7 @@ const Process = () => (
             {s.n}
           </div>
           <h3 className="mt-4 text-lg font-semibold tracking-tight text-white">{s.title}</h3>
-          <p className="mt-2 text-sm text-white/55 leading-[1.55]">{s.desc}</p>
+          <p className="mt-2 text-sm text-white/75 leading-[1.55]">{s.desc}</p>
         </Mo.div>
       ))}
     </div>
@@ -312,7 +312,7 @@ const Contact = () => {
           <span className="block">¿Tienes una idea?</span>
           <span className="block">Hagámosla realidad.</span>
         </h2>
-        <p className="mt-6 text-white/60 text-base leading-[1.6]">
+        <p className="mt-6 text-white/75 text-base leading-[1.6]">
           Desarrollamos el software y los bots de IA que tu negocio necesita para crecer. Déjanos tus datos o escríbenos por WhatsApp y demos el primer paso juntos.
         </p>
       </div>
@@ -453,7 +453,7 @@ const FAQ = () => {
                 </svg>
               </button>
               <div className={'px-6 overflow-hidden transition-all duration-300 ease-out ' + (isOpen ? 'max-h-60 pb-5 opacity-100' : 'max-h-0 opacity-0')}>
-                <p className="text-sm text-white/55 leading-[1.6]">{f.a}</p>
+                <p className="text-sm text-white/75 leading-[1.6]">{f.a}</p>
               </div>
             </div>
           );

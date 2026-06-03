@@ -92,7 +92,7 @@ const Hero = () => (
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5, ease: easeOut }}
-      className="mt-8 mx-auto text-white/60 max-w-md text-base leading-[1.5]"
+      className="mt-8 mx-auto text-white/75 max-w-md text-base leading-[1.5]"
     >
       Desarrollamos software a medida y automatizamos tus conversaciones con bots impulsados por inteligencia artificial.
     </M.p>
