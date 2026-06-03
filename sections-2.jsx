@@ -260,19 +260,42 @@ const Process = () => (
 
 // ============ Contact ============
 // TODO: reemplazar por los datos reales de UMBRA
-const CONTACT_EMAIL = 'contacto@umbra.com';
-const WHATSAPP_NUMBER = '5493875790909'; // formato internacional sin "+", ej: 5493875551234
+const CONTACT_EMAIL = 'tomass.pastrana@gmail.com';
+const WHATSAPP_NUMBER = '5493875790908'; // formato internacional sin "+", ej: 5493875551234
+// Pega aquí tu Access Key de https://web3forms.com (gratis). El correo llega solo, sin backend.
+const WEB3FORMS_KEY = '4a9aa663-bc20-4078-b023-96366be6f2d5';
 
 const Contact = () => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [message, setMessage] = React.useState('');
+  const [status, setStatus] = React.useState('idle'); // idle | sending | success | error
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Nuevo contacto desde la web — ${name || 'sin nombre'}`);
-    const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setStatus('sending');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Nuevo contacto desde la web — ${name || 'sin nombre'}`,
+          from_name: name,
+          email,
+          message,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus('success');
+        setName(''); setEmail(''); setMessage('');
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
   };
 
   const waText = encodeURIComponent('¡Hola UMBRA! Tengo una idea/proyecto y me gustaría más información.');
@@ -285,11 +308,12 @@ const Contact = () => {
         <div className="flex justify-center">
           <window.SectionEyebrow label="Contacto" tag="Hablemos" />
         </div>
-        <h2 className="mt-5 font-semibold tracking-tight leading-[1.05]" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}>
-          Cuéntanos tu proyecto
+        <h2 className="mt-5 font-semibold tracking-tight leading-[1.05]" style={{ fontSize: 'clamp(2rem, 4.5vw, 3.75rem)' }}>
+          <span className="block">¿Tienes una idea?</span>
+          <span className="block">Hagámosla realidad.</span>
         </h2>
-        <p className="mt-5 text-white/60 text-base leading-[1.6]">
-          Déjanos tus datos y un mensaje, o escríbenos directo por WhatsApp. Te respondemos a la brevedad.
+        <p className="mt-6 text-white/60 text-base leading-[1.6]">
+          Desarrollamos el software y los bots de IA que tu negocio necesita para crecer. Déjanos tus datos o escríbenos por WhatsApp y demos el primer paso juntos.
         </p>
       </div>
 
@@ -317,11 +341,21 @@ const Contact = () => {
           />
           <button
             type="submit"
-            className="group inline-flex items-center justify-center gap-2 rounded-full bg-white text-black font-medium text-sm px-5 py-3 transition-all hover:bg-white/90 active:scale-[0.98]"
+            disabled={status === 'sending'}
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-white text-black font-medium text-sm px-5 py-3 transition-all hover:bg-white/90 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Enviar mensaje
-            <window.ChevronRight size={16} className="transition-transform group-hover:translate-x-[1px]" />
+            {status === 'sending' ? 'Enviando…' : 'Enviar mensaje'}
+            {status !== 'sending' && (
+              <window.ChevronRight size={16} className="transition-transform group-hover:translate-x-[1px]" />
+            )}
           </button>
+
+          {status === 'success' && (
+            <p className="text-sm text-center text-[#A4F4FD]">¡Mensaje enviado! Te responderemos pronto.</p>
+          )}
+          {status === 'error' && (
+            <p className="text-sm text-center text-red-400">Hubo un problema al enviar. Probá de nuevo o escríbenos por WhatsApp.</p>
+          )}
         </form>
 
         <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
@@ -340,6 +374,91 @@ const Contact = () => {
           </a>
         </div>
       </Mo.div>
+    </section>
+  );
+};
+
+// ============ Floating WhatsApp ============
+const FloatingWhatsApp = () => {
+  const waText = encodeURIComponent('¡Hola UMBRA! Tengo una idea/proyecto y me gustaría más información.');
+  return (
+    <a
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`}
+      target="_blank" rel="noopener noreferrer"
+      aria-label="Escríbenos por WhatsApp"
+      className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-transform hover:scale-110 active:scale-95"
+      style={{ background: '#25D366' }}
+    >
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
+        <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+      </svg>
+    </a>
+  );
+};
+
+// ============ FAQ ============
+const faqs = [
+  {
+    q: '¿Cuánto tarda en estar listo mi proyecto?',
+    a: 'Depende del alcance. Un MVP o landing puede estar en 2–3 semanas; un desarrollo completo con bots e integraciones, entre 4 y 8 semanas. En la consultoría inicial te damos un tiempo estimado concreto.',
+  },
+  {
+    q: '¿Trabajan con clientes fuera de Salta o del país?',
+    a: 'Sí. Trabajamos 100% en remoto, así que podemos desarrollar tu proyecto estés donde estés. La comunicación es por videollamada, WhatsApp y email.',
+  },
+  {
+    q: '¿Qué incluye la consultoría gratuita?',
+    a: 'Una reunión para entender tu idea, tus objetivos y qué necesitas resolver. Salís con una propuesta clara de qué se puede hacer, cómo y en cuánto tiempo, sin compromiso.',
+  },
+  {
+    q: '¿Dan soporte después de la entrega?',
+    a: 'Sí. Todos los proyectos incluyen un período de soporte, y ofrecemos planes de mantenimiento continuo para que tu solución siga funcionando y creciendo.',
+  },
+  {
+    q: '¿Cómo manejan el presupuesto?',
+    a: 'Te pasamos un presupuesto cerrado y por escrito antes de empezar, con el alcance bien definido. Sin sorpresas ni costos ocultos.',
+  },
+];
+
+const FAQ = () => {
+  const [open, setOpen] = React.useState(-1);
+  return (
+    <section id="faq" className="relative z-10 max-w-screen-2xl mx-auto px-6 sm:px-8 lg:px-12 py-20 md:py-28 border-t border-white/10">
+      <div className="text-center max-w-2xl mx-auto">
+        <div className="flex justify-center">
+          <window.SectionEyebrow label="FAQ" tag="Preguntas frecuentes" />
+        </div>
+        <h2 className="mt-5 font-semibold tracking-tight leading-[1.05]" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)' }}>
+          ¿Tienes dudas? Las resolvemos
+        </h2>
+      </div>
+
+      <div className="mt-12 max-w-3xl mx-auto flex flex-col gap-3">
+        {faqs.map((f, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={i} className="liquid-glass rounded-2xl overflow-hidden">
+              <button
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                aria-expanded={isOpen}
+                className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
+              >
+                <span className="text-base font-medium text-white">{f.q}</span>
+                <svg
+                  width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  className={'shrink-0 text-white/60 transition-transform duration-300 ' + (isOpen ? 'rotate-180' : '')}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              <div className={'px-6 overflow-hidden transition-all duration-300 ease-out ' + (isOpen ? 'max-h-60 pb-5 opacity-100' : 'max-h-0 opacity-0')}>
+                <p className="text-sm text-white/55 leading-[1.6]">{f.a}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </section>
   );
 };
@@ -458,13 +577,9 @@ const FinalCTA = () => (
       <p className="relative mt-6 text-white/60 max-w-md mx-auto text-sm leading-[1.6]">
         Desarrollamos el software y los bots de IA que tu negocio necesita para crecer. Cuéntanos tu proyecto y demos el primer paso juntos.
       </p>
-      <div className="relative mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <div className="relative mt-8 flex items-center justify-center">
         <a href="#contacto">
           <window.AppleButton label="Agenda una demo" />
-        </a>
-        <a href="#contacto" className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/15 text-white text-sm font-medium px-5 py-3 hover:bg-white/5 transition-colors">
-          Hablar con ventas
-          <window.ChevronRight size={16} className="transition-transform group-hover:translate-x-[1px]" />
         </a>
       </div>
     </Mo.div>
@@ -488,4 +603,4 @@ const Footer = () => (
   </footer>
 );
 
-Object.assign(window, { FeatureTriage, LogoCloud, Testimonials, Services, Process, Contact, Pricing, FinalCTA, Footer });
+Object.assign(window, { FeatureTriage, LogoCloud, Testimonials, Services, Process, FAQ, Contact, FloatingWhatsApp, Pricing, FinalCTA, Footer });

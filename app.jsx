@@ -39,9 +39,10 @@ const App = () => (
     <window.LogoCloud />
     <window.Testimonials />
     <window.Process />
-    <window.FinalCTA />
+    <window.FAQ />
     <window.Contact />
     <window.Footer />
+    <window.FloatingWhatsApp />
   </div>
 );
 

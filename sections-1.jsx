@@ -43,7 +43,7 @@ const Navbar = () => {
       <div className="flex items-center">
         <window.LogoMark className="w-8 h-8" />
       </div>
-      <div className="hidden md:flex gap-8">
+      <div className="hidden md:flex gap-8 absolute left-1/2 -translate-x-1/2">
         {links.map((l, i) => (
           <M.a
             key={l.label}
@@ -56,9 +56,6 @@ const Navbar = () => {
             {l.label}
           </M.a>
         ))}
-      </div>
-      <div className="hidden md:block">
-        <window.AppleButton />
       </div>
       <button className="md:hidden w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center">
         <window.Menu size={16} />
@@ -97,7 +94,7 @@ const Hero = () => (
       transition={{ duration: 0.8, delay: 0.5, ease: easeOut }}
       className="mt-8 mx-auto text-white/60 max-w-md text-base leading-[1.5]"
     >
-      El paso que necesitas para que tu idea vea la luz. Desarrollamos software a medida y automatizamos tus conversaciones con bots impulsados por inteligencia artificial.
+      Desarrollamos software a medida y automatizamos tus conversaciones con bots impulsados por inteligencia artificial.
     </M.p>
     <M.div
       initial={{ opacity: 0, y: 20 }}
@@ -105,7 +102,9 @@ const Hero = () => (
       transition={{ duration: 0.8, delay: 0.7, ease: easeOut }}
       className="mt-8 flex flex-col items-center gap-3"
     >
-      <window.AppleButton />
+      <a href="#contacto">
+        <window.AppleButton />
+      </a>
       <span className="text-xs text-white/40">Agenda una consultoría gratuita</span>
     </M.div>
   </section>
