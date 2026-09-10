@@ -1,39 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UMBRA — Que tu idea vea la luz</title>
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="Vos atendés. Umbra se encarga. Un asistente virtual para tu consultorio: agenda automática, seguimiento de pacientes y configuración al instante. USD 250 por mes." />
+    <title>Umbra · Más tiempo para tus pacientes</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="./assets/just-another-hand.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="./assets/patrick-hand.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Ir al contenido</a>
+    <div class="page-sheet">
+      <header class="site-header">
+        <a class="wordmark" href="./" aria-label="Umbra, inicio">umbra<span class="wordmark-dot" aria-hidden="true">.</span></a>
+        <nav class="contact-nav" aria-label="Contactá a Umbra">
+          <a href="https://www.instagram.com/umbra_lat/" target="_blank" rel="noopener noreferrer" class="social-link">
+            <img src="./assets/instagram.svg" width="23" height="23" alt="" />
+            <span>umbra_lat</span><span class="external-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a href="https://wa.me/5493874836378" target="_blank" rel="noopener noreferrer" class="social-link phone-link" aria-label="Escribinos por WhatsApp al +54 9 387 483-6378">
+            <img src="./assets/whatsapp.svg" width="24" height="24" alt="" />
+            <span>+54 9 387 483-6378</span>
+          </a>
+        </nav>
+      </header>
 
-  <!-- Tailwind (CDN play build with config) -->
-  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: { brand: '#3D81E3' },
-          fontFamily: { sans: ['Inter','system-ui','sans-serif'] }
-        }
-      }
-    };
-  </script>
+      <main id="contenido">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">UN ASISTENTE. MÁS TIEMPO PARA VOS.</p>
+            <h1 id="hero-title">VOS ATENDÉS.<br /><span class="orange-underline">UMBRA SE ENCARGA.</span></h1>
+            <p class="hero-intro">Tu consultorio en orden.<br />Y vos, haciendo lo que mejor hacés.</p>
+          </div>
 
-  <link rel="stylesheet" href="styles.css?v=2" />
+          <div class="feature-area">
+            <div class="feature-orbit" data-active="none">
+              <svg class="orbit-ring" viewBox="0 0 560 560" fill="none" aria-hidden="true">
+                <path d="M283 26C425 20 531 126 530 276C534 415 427 526 287 531C145 536 30 433 27 288C19 143 129 31 283 26Z" />
+                <path d="M286 30C430 25 526 137 525 280C526 421 418 533 276 526C134 525 25 421 32 280C29 136 145 20 289 29" />
+              </svg>
+              <span class="orbit-dot orbit-dot-one" aria-hidden="true"></span>
+              <span class="orbit-dot orbit-dot-two" aria-hidden="true"></span>
 
-  <!-- React + Babel (pinned) -->
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+              <div class="orbit-welcome" id="orbit-welcome">
+                <div class="robot-halo">
+                  <span class="halo-shape" aria-hidden="true"></span>
+                  <img class="hero-robot" src="./assets/robot.png" alt="Umbra, un robot sonriente con guardapolvo y un teléfono en la mano" width="1744" height="1450" fetchpriority="high" />
+                  <span class="robot-spark" aria-hidden="true">✧</span>
+                </div>
+                <p class="hello-note">Hola, soy Umbra.</p>
+                <p class="welcome-caption">Tu nuevo asistente de consultorio.</p>
+              </div>
 
-  <!-- framer-motion intentionally omitted — sections use the Proxy fallback (plain elements). Drop in if you want runtime animations. -->
-</head>
-<body>
-  <div id="root"></div>
+              <div class="orbit-tabs" role="tablist" aria-label="Lo que Umbra hace por vos">
+                <button class="feature-tab tab-agenda" id="tab-agenda" type="button" role="tab" aria-selected="false" aria-controls="panel-agenda" data-feature="agenda"><span class="tab-number">01</span><span>Agenda automática</span><span class="tab-plus" aria-hidden="true">+</span></button>
+                <button class="feature-tab tab-patients" id="tab-patients" type="button" role="tab" aria-selected="false" aria-controls="panel-patients" data-feature="patients" tabindex="-1"><span class="tab-number">02</span><span>Seguimiento<br />de pacientes</span><span class="tab-plus" aria-hidden="true">+</span></button>
+                <button class="feature-tab tab-settings" id="tab-settings" type="button" role="tab" aria-selected="false" aria-controls="panel-settings" data-feature="settings" tabindex="-1"><span class="tab-number">03</span><span>Configuración<br />instantánea</span><span class="tab-plus" aria-hidden="true">+</span></button>
+              </div>
 
-  <script type="text/babel" data-presets="react" src="primitives.jsx?v=2"></script>
-  <script type="text/babel" data-presets="react" src="sections-1.jsx?v=2"></script>
-  <script type="text/babel" data-presets="react" src="sections-2.jsx?v=2"></script>
-  <script type="text/babel" data-presets="react" src="carousel.jsx?v=2"></script>
-  <script type="text/babel" data-presets="react" src="app.jsx?v=2"></script>
-</body>
+              <div class="feature-panel" id="panel-agenda" role="tabpanel" aria-labelledby="tab-agenda" tabindex="0" hidden>
+                <p>No perdés tiempo agendando. Umbra se encarga de hacerlo por vos, respetando tus horarios.</p>
+                <p class="panel-note">Vos solo ocupate de atender.</p>
+              </div>
+              <div class="feature-panel" id="panel-patients" role="tabpanel" aria-labelledby="tab-patients" tabindex="0" hidden>
+                <p>Cada paciente, en un mismo lugar. Registrá sus datos, asignale nuevos turnos y llevá un historial completo.</p>
+                <p class="panel-note">Seguí la conversación, sin perder el hilo.</p>
+              </div>
+              <div class="feature-panel" id="panel-settings" role="tabpanel" aria-labelledby="tab-settings" tabindex="0" hidden>
+                <p>Configurá horarios, feriados, servicios y preguntas frecuentes. Cada cambio se guarda y Umbra se adapta al instante.</p>
+                <p class="panel-note">Tu consultorio, tus reglas.</p>
+              </div>
+              <button class="orbit-reset" type="button" aria-label="Volver a la presentación de Umbra" hidden>volver al inicio <span aria-hidden="true">↶</span></button>
+            </div>
+            <div class="orbit-hint" aria-hidden="true">
+              <svg viewBox="0 0 100 60" fill="none"><path d="M5 53C54 59 85 35 80 6M65 20L80 5L94 21" /></svg>
+              <span>Tocá un botón,<br />te cuento más.</span>
+            </div>
+          </div>
+
+          <aside class="pricing" aria-label="Precio de Umbra">
+            <div class="price-box">
+              <span class="price-sticker">TODO ESTO, POR</span>
+              <p class="price"><span class="price-currency">USD</span> <span class="price-amount">250</span><span class="price-period">/ mes</span></p>
+              <span class="price-caption">Más simple. Desde el primer día.</span>
+              <svg class="price-spark" viewBox="0 0 50 65" fill="none" aria-hidden="true"><path d="M26 4C25 20 18 28 5 32C19 35 24 44 25 59C28 44 34 37 46 32C32 27 28 19 26 4Z" /></svg>
+            </div>
+            <ul class="included-list">
+              <li>Configuración inicial incluida.</li>
+              <li>Adaptación a tus horarios y tratamientos.</li>
+              <li>Atención por WhatsApp y gestión de turnos.</li>
+              <li>Mantenimiento y mejoras del sistema.</li>
+            </ul>
+            <p class="pricing-footnote">Los créditos de IA no están incluidos en el precio.<br />Los desarrollos especiales se cotizan aparte.</p>
+            <a class="contact-button" href="https://wa.me/5493874836378?text=Hola%2C%20quiero%20conocer%20m%C3%A1s%20sobre%20Umbra%20para%20mi%20consultorio." target="_blank" rel="noopener noreferrer">Hablemos de tu consultorio <span aria-hidden="true">↗</span></a>
+          </aside>
+        </section>
+
+        <section class="clients" aria-labelledby="clients-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">YA ES PARTE DE SU DÍA A DÍA</p><h2 id="clients-title">BUENA COMPAÑÍA.</h2></div>
+            <p class="handwritten section-aside">Consultorios reales.<br /><span>Tiempo recuperado.</span></p>
+          </div>
+          <div class="client-row">
+            <div class="client-identity">
+              <span class="client-monogram monogram-orange" aria-hidden="true">JT<span class="monogram-doodle">✳</span></span>
+              <div><h3>Dr. Jorge Trigo</h3><p class="client-location"><img src="./assets/map-pin.svg" width="17" height="17" alt="" /> Salta, Argentina</p><a class="client-instagram" href="https://www.instagram.com/jorgetrigo.ortodoncia/" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" width="17" height="17" alt="" />jorgetrigo.ortodoncia <span aria-hidden="true">↗</span></a></div>
+            </div>
+            <div class="client-result"><span class="result-number orange">+300</span><p>turnos agendados<br /><span>¡solo en agosto!</span></p></div>
+          </div>
+          <div class="client-row">
+            <div class="client-identity">
+              <span class="client-monogram monogram-purple" aria-hidden="true">MS<span class="monogram-doodle">✧</span></span>
+              <div><h3>Dr. Marcelo Sclarovsky</h3><p class="client-location"><img src="./assets/map-pin.svg" width="17" height="17" alt="" /> Salta, Argentina</p><a class="client-instagram" href="https://www.instagram.com/bruxismo_salta/" target="_blank" rel="noopener noreferrer"><img src="./assets/instagram.svg" width="17" height="17" alt="" />bruxismo_salta <span aria-hidden="true">↗</span></a></div>
+            </div>
+            <div class="client-result"><span class="result-number purple">+500</span><p>turnos agendados<br /><span>en julio y agosto.</span></p></div>
+          </div>
+        </section>
+
+        <section class="about" aria-label="Qué es Umbra y qué no es">
+          <article class="about-yes"><p class="handwritten about-kicker"><span aria-hidden="true">✓</span> Para que nos conozcamos</p><h2>QUÉ ES UMBRA.</h2><p>Un asistente virtual que agenda turnos y responde de forma natural. Se basa en tus reglas, no inventa información y se adapta a cada conversación para generar nuevos turnos.</p><span class="handwritten about-note">Tecnología, con un toque humano.</span></article>
+          <article class="about-no"><p class="handwritten about-kicker"><span aria-hidden="true">×</span> Dejemos esto claro</p><h2>QUÉ <span class="no-circle">NO</span> ES.</h2><p>Un bot genérico que se rompe si no seguís los pasos para agendar.</p><p class="about-small">Cada consultorio tiene su forma de trabajar.<br />Umbra se adapta a la tuya.</p></article>
+        </section>
+      </main>
+
+      <footer class="site-footer"><a class="wordmark footer-wordmark" href="./" aria-label="Umbra, inicio">umbra<span class="wordmark-dot" aria-hidden="true">.</span></a><p>Hecho para que vuelvas a tener tiempo.</p><span class="handwritten footer-location">Desde Salta, con ganas.</span></footer>
+    </div>
+  </body>
 </html>
